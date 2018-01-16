@@ -28,20 +28,20 @@ End Module
 
 Public Class BracketValidator
 
-    Private Structure BracketChar
-        Public OpenChar As String
-        Public CloseChar As String
+    Private Structure BracketToken
+        Public OpenToken As String
+        Public CloseToken As String
     End Structure
 
     'Список скобок
-    Private listBrackets As New List(Of BracketChar)
+    Private listBrackets As New List(Of BracketToken)
 
     'Конструктор
     Public Sub New()
-        listBrackets.Add(New BracketChar() With {.OpenChar = "(", .CloseChar = ")"})
-        listBrackets.Add(New BracketChar() With {.OpenChar = "[", .CloseChar = "]"})
-        listBrackets.Add(New BracketChar() With {.OpenChar = "{", .CloseChar = "}"})
-        listBrackets.Add(New BracketChar() With {.OpenChar = "<", .CloseChar = ">"})
+        listBrackets.Add(New BracketToken() With {.OpenToken = "(", .CloseToken = ")"})
+        listBrackets.Add(New BracketToken() With {.OpenToken = "[", .CloseToken = "]"})
+        listBrackets.Add(New BracketToken() With {.OpenToken = "{", .CloseToken = "}"})
+        listBrackets.Add(New BracketToken() With {.OpenToken = "<", .CloseToken = ">"})
     End Sub
 
 
@@ -76,7 +76,7 @@ Public Class BracketValidator
     ''' <summary>Проверка скобок на отношение к одному типу</summary>
     Private Function IsBracketFamily(BracketOpen As String, BracketClose As String) As Boolean
         For Each Br In listBrackets
-            If Br.OpenChar = BracketOpen AndAlso Br.CloseChar = BracketClose Then Return True
+            If Br.OpenToken = BracketOpen AndAlso Br.CloseToken = BracketClose Then Return True
         Next
         Return False
     End Function
@@ -84,7 +84,7 @@ Public Class BracketValidator
     ''' <summary>Проверяет, является ли символ открытой скобкой</summary>
     Private Function IsOpenBracket(TokenChar) As Boolean
         For Each Br In listBrackets
-            If Br.OpenChar = TokenChar Then Return True
+            If Br.OpenToken = TokenChar Then Return True
         Next
         Return False
     End Function
@@ -92,8 +92,9 @@ Public Class BracketValidator
     ''' <summary>Проверяет, является ли символ закрытой скобкой</summary>
     Private Function IsCloseBracket(TokenChar) As Boolean
         For Each Br In listBrackets
-            If Br.CloseChar = TokenChar Then Return True
+            If Br.CloseToken = TokenChar Then Return True
         Next
         Return False
     End Function
+
 End Class
